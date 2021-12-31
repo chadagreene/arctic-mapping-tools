@@ -1,0 +1,384 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Arctic Mapping Examples</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-02-06"><meta name="DC.source" content="ArcticMappingExamples.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Arctic Mapping Examples</h1><!--introduction--><p>This file shows a few examples of how to use Arctic Mapping Tools for Matlab.</p><p><b>Note:</b> Arctic Mapping Tools is a light version of <a href="https://www.mathworks.com/matlabcentral/fileexchange/47638">Antarctic Mapping Tools for Matlab</a> (Greene et al., 2017), tweaked for north polar stereographic coordinates where 70N is the latitude of true scale and the central meridian is 45W. For <i>MUCH</i> better documentation, check out the Examples section of the Antarctic Mapping Tools page.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Coordinate transformations and other conversions</a></li><li><a href="#2">Data analysis</a></li><li><a href="#3">Base Maps</a></li><li><a href="#4">Plotting Functions</a></li><li><a href="#5">Other Map Elements</a></li><li><a href="#6">Putting it all together</a></li><li><a href="#15">Changing the meridian</a></li><li><a href="#18">Background image</a></li><li><a href="#19">Citing AMT</a></li><li><a href="#20">Author Info</a></li></ul></div><h2 id="1">Coordinate transformations and other conversions</h2><p>Get familiar with <tt>ll2psn</tt> and <tt>psn2ll</tt> because they'll be useful on the daily. And again, I recommend looking over the Antarctic Mapping Tools Getting Started page, which walks you through how this toolbox is structured.</p><div><ul><li><tt>ll2psn</tt> convert lat,lon coordinates to north polar stereographic meters.</li></ul></div><div><ul><li><tt>psn2ll</tt> convert north polar stereographic meters to lat,lon coordinates.</li></ul></div><div><ul><li><tt>uv2vxvyn</tt> convert zonal and meridional components of vectors to north polar stererographic x and y components.</li></ul></div><div><ul><li><tt>vxvyn2uv</tt> convert north polar stereographic x and y components of vectors to zonal and meridional components.</li></ul></div><div><ul><li><tt>freeboard2thickness</tt> convert height above sea level to ice thickness assuming hydrostatic equilibrium.</li></ul></div><div><ul><li><tt>thickness2freeboard</tt> convert ice thickness to height above sea level assuming hydrostatic equilibrium.</li></ul></div><h2 id="2">Data analysis</h2><p>These functions are often useful for analyzing geospatial data:</p><div><ul><li><tt>pathdistpsn</tt> calculate distance in north polar stereographic units along a path.</li></ul></div><div><ul><li><tt>psnpath</tt> generate a path equally-spaced in north polar stereographic units.</li></ul></div><div><ul><li><tt>psngrid</tt> generate a grid of points equally spaced in north polar stereographic units.</li></ul></div><div><ul><li><tt>inpsnquad</tt> determine whether points are within a north polar stereographic quadrangle.</li></ul></div><h2 id="3">Base Maps</h2><p>Arctic Mapping Tools currently has just a couple of functions for providing spatial context. They are:</p><div><ul><li><tt>arcticborders</tt> outlines land areas as line or patch objects.</li></ul></div><div><ul><li><tt>greenland</tt> outlines Greenland as a line or patch object.</li></ul></div><div><ul><li><tt>modismog</tt> <a href="https://nsidc.org/data/nsidc-0547">MODIS Mosaic of Greenland</a> background image.</li></ul></div><h2 id="4">Plotting Functions</h2><p>The following functions are act just like standard Matlab plotting functions, but they accept geographic (lat,lon) units, perform coordinate transformations via <tt>ll2psn</tt>, and then plot in north polar stereographic units.</p><div><ul><li><tt>circlepsn</tt> plots circles of given radii.</li></ul></div><div><ul><li><tt>contourfpsn</tt> plots filled contour lines.</li></ul></div><div><ul><li><tt>contourpsn</tt> plots contour lines.</li></ul></div><div><ul><li><tt>patchpsn</tt> creates filled patch objects.</li></ul></div><div><ul><li><tt>pcolorpsn</tt> creates pseudocolor maps.</li></ul></div><div><ul><li><tt>plot3psn</tt> plots points in 3D space.</li></ul></div><div><ul><li><tt>plotpsn</tt> plots marker or line data just like Matlab's <tt>plot</tt> function.</li></ul></div><div><ul><li><tt>quiverpsn</tt> resamples and plots vectors such as wind or ocean currents.</li></ul></div><div><ul><li><tt>scatterpsn</tt> plots color-scaled scattered point data.</li></ul></div><div><ul><li><tt>surfpsn</tt> plots surfaces in 3D space.</li></ul></div><div><ul><li><tt>textpsn</tt> places text labels on maps.</li></ul></div><h2 id="5">Other Map Elements</h2><p>Maps aren't just about base maps with a few things plotted on them. You might also want things like grid lines and graphical reference scales. Here are some of the basics:</p><div><ul><li><tt>graticulepsn</tt> create a lat,lon grid.</li></ul></div><div><ul><li><tt>mapzoompsn</tt> zoom a map to a location and create inset maps.</li></ul></div><div><ul><li><tt>scalebarpsn</tt> create a graphical reference scale bar.</li></ul></div><div><ul><li><tt>coordpsn</tt> click on a map to get coordinates.</li></ul></div><div><ul><li><tt>shadem</tt> apply relief shading to a DEM, aka hillshade.</li></ul></div><h2 id="6">Putting it all together</h2><p>Let's say you want to make a map of Greenland. Well that's easy, just type <tt>greenland</tt>. Here's how:</p><pre class="codeinput">greenland
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_01.png" alt=""> <p>Perhaps you'd prefer the land areas to be filled in as a <tt>patch</tt> object. And shouldn't Greenland be green?</p><pre class="codeinput">greenland(<span class="string">'patch'</span>,<span class="string">'facecolor'</span>,<span class="string">'green'</span>)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_02.png" alt=""> <p>If you want to place markers at given geographic locations, use <tt>plotpsn</tt>. Below we'll put big red circles on three glaciers:</p><pre class="codeinput">lat = [66.3, 80.75 69.167];
+lon = [-38.2 -65.75 -49.833];
+
+plotpsn(lat,lon,<span class="string">'ro'</span>,<span class="string">'markersize'</span>,20)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_03.png" alt=""> <p>Notice, we fed lat,lon locations to the <tt>plotpsn</tt> function above, but the x,y axes show units on the order of 10^6. Those units are polar stereographic meters. Calling <tt>plotpsn</tt> is the same thing as transforming the units yourself with <tt>ll2psn</tt>, then using the standard Matlab <tt>plot</tt> function to plot in meters. Here's what I mean: Start by converting <tt>lat,lon</tt> to meters:</p><pre class="codeinput">[x,y] = ll2psn(lat,lon)
+</pre><pre class="codeoutput">x =
+     308219.98    -355751.35    -192176.19
+y =
+   -2584810.40    -938989.65   -2272865.18
+</pre><p>And now let's plot the three locations as big red x marks using the standard Matlab <tt>plot</tt> command:</p><pre class="codeinput">hold <span class="string">on</span>
+plot(x,y,<span class="string">'rx'</span>,<span class="string">'markersize'</span>,20)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_04.png" alt=""> <p>We can label those three places with <tt>textpsn</tt>:</p><pre class="codeinput">places = {<span class="string">'Helheim Glacier'</span>,<span class="string">'Petermann Glacier'</span>,<span class="string">'Jakobshavn Glacier'</span>};
+
+textpsn(lat,lon,places)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_05.png" alt=""> <p>Let's say you want a grid of points centered on Jakobshavn Glacier. Make it 500 km wide and 800 km tall, with 10 km resolution:</p><pre class="codeinput">[latgrid,longrid] = psngrid(69.167,-49.833,[500 800],10);
+plotpsn(latgrid,longrid,<span class="string">'b.'</span>)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_06.png" alt=""> <p>Let's zoom in on that grid with <tt>mapzoompsn</tt>, and include the <tt>'n'</tt> option to place an inset map in the upper right corner of the map:</p><pre class="codeinput">mapzoompsn(69.167,-49.833,<span class="string">'mapwidth'</span>,[500 800],<span class="string">'ne'</span>)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_07.png" alt=""> <p>Place a graphical reference scale in the lower right hand corner of the map. And if you don't like the ugly x,y axes on the bottom and left hand side, remove them with <tt>axis off</tt>.</p><pre class="codeinput">scalebarpsn(<span class="string">'location'</span>,<span class="string">'se'</span>)
+axis <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_08.png" alt=""> <h2 id="15">Changing the meridian</h2><p>The standard meridian in the north polar stereographic projecion is 45 degrees W. But someone recently asked me how to plot with the meridian at 39 W. Generally, all the AMT functions will work most reliably using the standard projection, but here's how you can do it if you need. First, a depiction of the difference:</p><pre class="codeinput">figure
+
+greenland
+greenland(<span class="string">'meridian'</span>,-39)
+legend(<span class="string">'meridian: 45\circW'</span>,<span class="string">'meridian: 39\circW'</span>)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_09.png" alt=""> <p>Following through with more data, we can repeat all the examples from above, but with the meridian at 39 W:</p><pre class="codeinput">figure
+
+<span class="comment">% Outline:</span>
+greenland(<span class="string">'meridian'</span>,-39)
+
+<span class="comment">% A green patch:</span>
+greenland(<span class="string">'patch'</span>,<span class="string">'facecolor'</span>,<span class="string">'green'</span>,<span class="string">'meridian'</span>,-39)
+
+<span class="comment">% Three glaciers:</span>
+lat = [66.3, 80.75 69.167];
+lon = [-38.2 -65.75 -49.833];
+
+<span class="comment">% Plot the glaciers as red circles:</span>
+plotpsn(lat,lon,<span class="string">'ro'</span>,<span class="string">'markersize'</span>,20,<span class="string">'meridian'</span>,-39)
+
+<span class="comment">% Instead of using plotpsn, you can convert coordinates yourself:</span>
+[x,y] = ll2psn(lat,lon,<span class="string">'meridian'</span>,-39);
+
+<span class="comment">% And with the converted coordinates, just use plain plot function:</span>
+hold <span class="string">on</span>
+plot(x,y,<span class="string">'rx'</span>,<span class="string">'markersize'</span>,20)
+
+<span class="comment">% Label the three glaciers:</span>
+places = {<span class="string">'Helheim Glacier'</span>,<span class="string">'Petermann Glacier'</span>,<span class="string">'Jakobshavn Glacier'</span>};
+textpsn(lat,lon,places,<span class="string">'meridian'</span>,-39)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_10.png" alt=""> <p>And if you have the BedMachine functions, you can plot bed elevations like this, doing a 300 km x 300 km grid around Petermann. (Below I'm using a <a href="https://www.mathworks.com/matlabcentral/fileexchange/57773"><tt>cmocean</tt></a> colormap).</p><pre class="codeinput"><span class="comment">% Load BedMachine data surrounding Petermann Gl:</span>
+[bed,Lat,Lon] = bedmachine_data(<span class="string">'bed'</span>,80.75,-65.75,<span class="string">'buffer'</span>,150,<span class="string">'geo'</span>);
+
+figure
+pcolorpsn(Lat,Lon,bed,<span class="string">'meridian'</span>,-39) <span class="comment">% plots bed elev.</span>
+
+axis <span class="string">tight</span>                    <span class="comment">% gets rid of white space</span>
+greenland(<span class="string">'k'</span>,<span class="string">'meridian'</span>,-39) <span class="comment">% plots black grounding line</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'bed elevation (m wrt geoid)'</span>)
+cmocean(<span class="string">'topo'</span>,<span class="string">'pivot'</span>)       <span class="comment">% optional colormap</span>
+shadem(3)                     <span class="comment">% applies hillshade</span>
+
+xlabel <span class="string">'easting (m')</span>
+ylabel <span class="string">'easting (m')</span>
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_11.png" alt=""> <h2 id="18">Background image</h2><p>Sometimes you just want a nice bacground image to plot things atop. I like the MODIS Mosaic of Greenland, which places a grayscale image object (not tied to the current colormap) on the bottom of the stack of whatever objects you're plotting. I especially like the <tt>'contrast','white'</tt> option, which is good when you want to overlay semitransparent pcolor data like ice speed or whatnot.</p><p>Here we zoom to an area of interest before calling <tt>modismog</tt> because otherwise the entire dataset gets loaded and plotted.</p><pre class="codeinput">figure
+mapzoompsn(64.4,-49.8,<span class="string">'se'</span>,<span class="string">'frame'</span>,<span class="string">'off'</span>)
+modismog(<span class="string">'contrast'</span>,<span class="string">'white'</span>)
+scalebarps(<span class="string">'color'</span>,<span class="string">'white'</span>)
+</pre><img vspace="5" hspace="5" src="ArcticMappingExamples_12.png" alt=""> <h2 id="19">Citing AMT</h2><p>If the Arctic Mapping Tools are useful for you, please cite the paper that describes AMT.</p><p>Greene, C. A., Gwyther, D. E., &amp; Blankenship, D. D. Antarctic Mapping Tools for Matlab. <i>Computers &amp; Geosciences</i>. 104 (2017) pp.151-157. <a href="http://dx.doi.org/10.1016/j.cageo.2016.08.003">doi:10.1016/j.cageo.2016.08.003</a>.</p><h2 id="20">Author Info</h2><p>This page was written by <a href="http://www.chadagreene.com">Chad Greene</a> of the University of Texas Institute for Geophysics (UTIG), June 2017. Feel free to contact me if you have any questions.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Arctic Mapping Examples
+% This file shows a few examples of how to use Arctic Mapping Tools for Matlab. 
+% 
+% *Note:* Arctic Mapping Tools is a light version of <https://www.mathworks.com/matlabcentral/fileexchange/47638 
+% Antarctic Mapping Tools for Matlab> (Greene et al., 2017), tweaked for north polar stereographic coordinates
+% where 70N is the latitude of true scale and the central meridian is 45W. For _MUCH_ better
+% documentation, check out the Examples section of the Antarctic Mapping Tools page. 
+
+%% Coordinate transformations and other conversions
+% Get familiar with |ll2psn| and |psn2ll| because they'll be useful on the daily. 
+% And again, I recommend looking over the Antarctic Mapping Tools Getting Started
+% page, which walks you through how this toolbox is structured. 
+% 
+% * |ll2psn| convert lat,lon coordinates to north polar stereographic meters. 
+% 
+% * |psn2ll| convert north polar stereographic meters to lat,lon coordinates. 
+% 
+% * |uv2vxvyn| convert zonal and meridional components of vectors to north polar 
+% stererographic x and y components. 
+% 
+% * |vxvyn2uv| convert north polar stereographic x and y components of vectors 
+% to zonal and meridional components. 
+% 
+% * |freeboard2thickness| convert height above sea level to ice thickness assuming hydrostatic equilibrium. 
+% 
+% * |thickness2freeboard| convert ice thickness to height above sea level assuming hydrostatic equilibrium. 
+% 
+%% Data analysis 
+% These functions are often useful for analyzing geospatial data: 
+% 
+% * |pathdistpsn| calculate distance in north polar stereographic units along a path. 
+% 
+% * |psnpath| generate a path equally-spaced in north polar stereographic units. 
+% 
+% * |psngrid| generate a grid of points equally spaced in north polar stereographic units. 
+% 
+% * |inpsnquad| determine whether points are within a north polar stereographic quadrangle.  
+% 
+%% Base Maps 
+% Arctic Mapping Tools currently has just a couple of functions for providing spatial context. 
+% They are: 
+% 
+% * |arcticborders| outlines land areas as line or patch objects. 
+% 
+% * |greenland| outlines Greenland as a line or patch object. 
+%
+% * |modismog| <https://nsidc.org/data/nsidc-0547 MODIS Mosaic of Greenland> background image. 
+% 
+%% Plotting Functions
+% The following functions are act just like standard Matlab plotting functions, 
+% but they accept geographic (lat,lon) units, perform coordinate transformations
+% via |ll2psn|, and then plot in north polar stereographic units. 
+% 
+% * |circlepsn| plots circles of given radii. 
+% 
+% * |contourfpsn| plots filled contour lines. 
+% 
+% * |contourpsn| plots contour lines.  
+% 
+% * |patchpsn| creates filled patch objects.  
+% 
+% * |pcolorpsn| creates pseudocolor maps.  
+% 
+% * |plot3psn| plots points in 3D space.  
+% 
+% * |plotpsn| plots marker or line data just like Matlab's |plot| function.  
+% 
+% * |quiverpsn| resamples and plots vectors such as wind or ocean currents.  
+% 
+% * |scatterpsn| plots color-scaled scattered point data.  
+% 
+% * |surfpsn| plots surfaces in 3D space.  
+% 
+% * |textpsn| places text labels on maps.  
+% 
+%% Other Map Elements 
+% Maps aren't just about base maps with a few things plotted on them. You might also want 
+% things like grid lines and graphical reference scales. Here are some of the basics: 
+% 
+% * |graticulepsn| create a lat,lon grid. 
+% 
+% * |mapzoompsn| zoom a map to a location and create inset maps. 
+% 
+% * |scalebarpsn| create a graphical reference scale bar.  
+% 
+% * |coordpsn| click on a map to get coordinates. 
+% 
+% * |shadem| apply relief shading to a DEM, aka hillshade. 
+%
+
+%% Putting it all together
+% Let's say you want to make a map of Greenland. Well that's easy, just type 
+% |greenland|. Here's how: 
+
+greenland
+
+%% 
+% Perhaps you'd prefer the land areas to be filled in as a |patch| object. And 
+% shouldn't Greenland be green? 
+
+greenland('patch','facecolor','green')
+
+%% 
+% If you want to place markers at given geographic locations, use |plotpsn|. 
+% Below we'll put big red circles on three glaciers: 
+
+lat = [66.3, 80.75 69.167]; 
+lon = [-38.2 -65.75 -49.833]; 
+
+plotpsn(lat,lon,'ro','markersize',20)
+
+%% 
+% Notice, we fed lat,lon locations to the |plotpsn| function above, but the 
+% x,y axes show units on the order of 10^6. Those units are polar stereographic
+% meters. Calling |plotpsn| is the same thing as transforming the units yourself
+% with |ll2psn|, then using the standard Matlab |plot| function to plot in meters. 
+% Here's what I mean: Start by converting |lat,lon| to meters: 
+
+[x,y] = ll2psn(lat,lon)
+
+%% 
+% And now let's plot the three locations as big red x marks using the standard Matlab |plot| command: 
+
+hold on
+plot(x,y,'rx','markersize',20) 
+
+%% 
+% We can label those three places with |textpsn|: 
+
+places = {'Helheim Glacier','Petermann Glacier','Jakobshavn Glacier'}; 
+
+textpsn(lat,lon,places) 
+
+%% 
+% Let's say you want a grid of points centered on Jakobshavn Glacier. Make it 500 km wide
+% and 800 km tall, with 10 km resolution: 
+
+[latgrid,longrid] = psngrid(69.167,-49.833,[500 800],10); 
+plotpsn(latgrid,longrid,'b.') 
+
+%% 
+% Let's zoom in on that grid with |mapzoompsn|, and include the |'n'| 
+% option to place an inset map in the upper right corner of the map: 
+
+mapzoompsn(69.167,-49.833,'mapwidth',[500 800],'ne') 
+
+%% 
+% Place a graphical reference scale in the lower right hand corner of the map. And 
+% if you don't like the ugly x,y axes on the bottom and left hand side, remove them with |axis off|. 
+
+scalebarpsn('location','se') 
+axis off 
+
+%% Changing the meridian
+% The standard meridian in the north polar stereographic projecion 
+% is 45 degrees W. But someone recently asked me how to plot with 
+% the meridian at 39 W. Generally, all the AMT functions will work 
+% most reliably using the standard projection, but here's how you can do it
+% if you need. First, a depiction of the difference: 
+
+figure
+
+greenland
+greenland('meridian',-39)
+legend('meridian: 45\circW','meridian: 39\circW')
+
+%% 
+% 
+% Following through with more data, we can repeat all the examples from above, but with the
+% meridian at 39 W:
+
+figure 
+
+% Outline: 
+greenland('meridian',-39)
+
+% A green patch: 
+greenland('patch','facecolor','green','meridian',-39)
+
+% Three glaciers: 
+lat = [66.3, 80.75 69.167]; 
+lon = [-38.2 -65.75 -49.833]; 
+
+% Plot the glaciers as red circles: 
+plotpsn(lat,lon,'ro','markersize',20,'meridian',-39)
+
+% Instead of using plotpsn, you can convert coordinates yourself: 
+[x,y] = ll2psn(lat,lon,'meridian',-39);
+
+% And with the converted coordinates, just use plain plot function:
+hold on
+plot(x,y,'rx','markersize',20) 
+
+% Label the three glaciers: 
+places = {'Helheim Glacier','Petermann Glacier','Jakobshavn Glacier'}; 
+textpsn(lat,lon,places,'meridian',-39) 
+
+%% 
+% And if you have the BedMachine functions, you can plot bed elevations like
+% this, doing a 300 km x 300 km grid around Petermann. (Below I'm using a 
+% <https://www.mathworks.com/matlabcentral/fileexchange/57773 |cmocean|> colormap). 
+
+% Load BedMachine data surrounding Petermann Gl: 
+[bed,Lat,Lon] = bedmachine_data('bed',80.75,-65.75,'buffer',150,'geo'); 
+
+figure
+pcolorpsn(Lat,Lon,bed,'meridian',-39) % plots bed elev.
+
+axis tight                    % gets rid of white space
+greenland('k','meridian',-39) % plots black grounding line
+cb = colorbar;
+ylabel(cb,'bed elevation (m wrt geoid)')
+cmocean('topo','pivot')       % optional colormap
+shadem(3)                     % applies hillshade
+
+xlabel 'easting (m') 
+ylabel 'easting (m') 
+
+%% Background image 
+% Sometimes you just want a nice bacground image to plot things atop. I like 
+% the MODIS Mosaic of Greenland, which places a grayscale image object (not tied to the 
+% current colormap) on the bottom of the stack of whatever objects you're plotting. 
+% I especially like the |'contrast','white'| option, which is good when you want
+% to overlay semitransparent pcolor data like ice speed or whatnot. 
+% 
+% Here we zoom to an area of interest before calling |modismog| because otherwise
+% the entire dataset gets loaded and plotted. 
+
+figure
+mapzoompsn(64.4,-49.8,'se','frame','off')
+modismog('contrast','white') 
+scalebarps('color','white')
+
+%% Citing AMT
+% If the Arctic Mapping Tools are useful for you, please cite the paper that describes AMT.  
+% 
+% Greene, C. A., Gwyther, D. E., & Blankenship, D. D. Antarctic Mapping Tools for Matlab. 
+% _Computers & Geosciences_. 104 (2017) pp.151-157. <http://dx.doi.org/10.1016/j.cageo.2016.08.003 doi:10.1016/j.cageo.2016.08.003>.
+
+%% Author Info
+% This page was written by <http://www.chadagreene.com Chad Greene> of the University of Texas
+% Institute for Geophysics (UTIG), June 2017. Feel free to contact me if you have any questions. 
+##### SOURCE END #####
+--></body></html>
